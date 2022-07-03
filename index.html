@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CAj</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet-src.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.76.1/dist/L.Control.Locate.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.76.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+  
+  <script>
+    var overlay;
+    function init() {
+      var mapBounds = new L.LatLngBounds(
+      new L.LatLng(39.678207981379224, 20.116272310796024),
+      new L.LatLng(39.68535534248258, 20.128292383073955));
+      var mapMinZoom = 0;
+      var mapMaxZoom = 20;
+      var map = L.map('map').setView([39.6817816619309,20.122282346934988], 18);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      overlay = L.tileLayer('http://tiles.paths-erc.eu/CAj/{z}/{x}/{y}.png', {
+        minZoom: mapMinZoom, maxZoom: mapMaxZoom,
+        bounds: mapBounds,
+        opacity: 0.85
+      }).addTo(map);
+      
+      lc = L.control.locate({
+        strings: {
+          title: "Show me where I am, yo!"
+        }
+      }).addTo(map);
+      
+    }
+  </script>
+  <style>
+    html, body, #map { width:100%; height:100%; margin:0; padding:0; }
+  </style>
+</head>
+<body onload="init()">
+  <div id="map"></div>
+</body>
+</html>
