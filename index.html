@@ -19,14 +19,19 @@
       var mapMaxZoom = 20;
       var map = L.map('map').setView([39.6817816619309,20.122282346934988], 18);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-      overlay = L.tileLayer('http://tiles.paths-erc.eu/CAj/{z}/{x}/{y}.png', {
-        minZoom: mapMinZoom, maxZoom: mapMaxZoom,
+      overlay = L.tileLayer('https://tiles.paths-erc.eu/CAj/{z}/{x}/{y}.png', {
+        minZoom: mapMinZoom,
+        maxZoom: mapMaxZoom,
         bounds: mapBounds,
         opacity: 0.85
       }).addTo(map);
       
       lc = L.control.locate({
         setView: 'always',
+        locateOptions: {
+          watch: true,
+          enableHighAccuracy: true
+        },
         strings: {
           title: "Show me where I am, yo!"
         }
